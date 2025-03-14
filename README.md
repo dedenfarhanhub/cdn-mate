@@ -18,7 +18,7 @@ CDNMate is a blazing-fast, minimal-dependency image processing and CDN uploader 
 Install CDNMate via Go modules:
 
 ```sh
- go get github.com/dedenfarhanhub/cdnmate
+ go get github.com/dedenfarhanhub/cdn-mate
 ```
 
 ---
@@ -27,7 +27,7 @@ Install CDNMate via Go modules:
 
 ### 1️⃣ **Initialize the Processor**
 ```go
-import "github.com/dedenfarhanhub/cdnmate"
+import "github.com/dedenfarhanhub/cdn-mate/cdnmate"
 
 // Load Configurations
 envConfig := cdnmate.LoadConfig()
