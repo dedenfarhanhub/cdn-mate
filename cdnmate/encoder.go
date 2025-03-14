@@ -13,22 +13,22 @@ import (
 
 // ImageEncoder handles encoding images into different formats
 type ImageEncoder interface {
-	EncodeImage(buf *bytes.Buffer, img image.Image, format string, quality int) error
+	EncodeImage(buf *bytes.Buffer, img image.Image, format string, quality float32) error
 }
 
 // DefaultEncoder implements ImageEncoder
 type DefaultEncoder struct{}
 
 // EncodeImage converts an image to a buffer in the specified format with quality settings
-func (e *DefaultEncoder) EncodeImage(buf *bytes.Buffer, img image.Image, format string, quality int) error {
+func (e *DefaultEncoder) EncodeImage(buf *bytes.Buffer, img image.Image, format string, quality float32) error {
 	switch format {
 	case "jpeg", "jpg":
-		opts := jpeg.Options{Quality: quality}
+		opts := jpeg.Options{Quality: int(quality)}
 		return jpeg.Encode(buf, img, &opts)
 	case "png":
 		return png.Encode(buf, img)
 	case "webp":
-		options, err := encoder.NewLossyEncoderOptions(encoder.PresetDefault, float32(quality))
+		options, err := encoder.NewLossyEncoderOptions(encoder.PresetDefault, quality)
 		if err != nil {
 			return fmt.Errorf("failed to create WebP encoder options: %w", err)
 		}
